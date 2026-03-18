@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Братство Дристократов</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Основные цвета и шрифт текста */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f8; /* Очень светлый фон для чистоты */
+            color: #333; /* Тёмно-серый текст */
+            /* Trebuchet MS как основной, Arial как запасной */
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Контейнер-карточка (как в тронном зале) */
+        .aristocrat-card {
+            background: #ffffff;
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 15px 40px rgba(126, 147, 241, 0.2); /* Тень в базовом цвете */
+            max-width: 700px;
+            border: 3px solid #7e93f1; /* Рамка в базовом цвете */
+        }
+
+        /* Жирный заголовок: Comfortaa */
+        h1 {
+            font-family: 'Comfortaa', cursive;
+            font-weight: 700;
+            color: #7e93f1; /* Базовый цвет */
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Описание: Trebuchet MS */
+        p {
+            font-size: 1.3em;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            color: #4a4a4a;
+        }
+
+        /* Выделение важных слов базовым цветом */
+        .highlight {
+            color: #7e93f1;
+            font-weight: bold;
+        }
+
+        /* Красивая кнопка-ссылка */
+        .btn {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 18px 50px;
+            background-color: #7e93f1; /* Базовый цвет */
+            color: #ffffff;
+            text-decoration: none;
+            font-family: 'Comfortaa', cursive; /* Тоже пафосный шрифт */
+            font-weight: 700;
+            font-size: 1.4em;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(126, 147, 241, 0.4);
+        }
+
+        /* Эффект при наведении */
+        .btn:hover {
+            transform: translateY(-5px); /* Всплывание */
+            background-color: #ffffff;
+            color: #7e93f1;
+            box-shadow: 0 10px 25px rgba(126, 147, 241, 0.6);
+            border: 2px solid #7e93f1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="aristocrat-card">
+        <h1>Вас приветствует братство "Дристократов"</h1>
+        
+        <p>Если ты здесь, значит ты заинтересован нашим сообществом, это великая честь для нас. Мы представляем собственную идеологию и верование, наши принципы строятся на поклонении великому деянию человека, <span class="highlight">дристу</span>. И если тебе близки наши принципы то ты, дорогой мой можешь захотеть присоединиться к нам.</p>
+        
+        <p>Твои дальнейшие действия только твой выбор, а мы можем всего лишь предложить тебе попытать удачу во вступлении в дристократы!</p>
+        
+        <a href="https://forms.gle/SDZfBoFipLtCWs777" class="btn">Попытать удачу</a>
+    </div>
+
+</body>
+</html>
