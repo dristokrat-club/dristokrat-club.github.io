@@ -10,106 +10,108 @@
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
     
     <style>
-        /* Основные цвета и шрифт текста */
+        /* Общие настройки страницы */
         body {
             margin: 0;
             padding: 0;
-            background-color: #f0f2f8; /* Очень светлый фон для чистоты */
-            color: #333; /* Тёмно-серый текст */
-            /* Trebuchet MS как основной, Arial как запасной */
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            background-color: #f0f2f8; /* Светлый фон */
+            color: #333;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
             text-align: center;
-            padding: 20px;
         }
 
-        /* Контейнер-карточка (как в тронном зале) */
+        /* Контейнер (карточка) — теперь идеально для телефона */
         .aristocrat-card {
             background: #ffffff;
-            padding: 50px;
-            border-radius: 30px;
-            box-shadow: 0 15px 40px rgba(126, 147, 241, 0.2); /* Тень в базовом цвете */
-            max-width: 700px;
-            border: 3px solid #7e93f1; /* Рамка в базовом цвете */
+            padding: 30px 20px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(126, 147, 241, 0.2);
+            width: 92%; /* Резиновая ширина для мобилок */
+            max-width: 600px; /* Ограничение для компьютера */
+            border: 3px solid #7e93f1;
+            box-sizing: border-box;
+            margin: 20px 0;
         }
 
-        /* Жирный заголовок: Comfortaa */
+        /* Заголовок — адаптивный размер */
         h1 {
             font-family: 'Comfortaa', cursive;
             font-weight: 700;
-            color: #7e93f1; /* Базовый цвет */
-            font-size: 2.5em;
-            margin-top: 0;
-            margin-bottom: 30px;
+            color: #7e93f1;
+            font-size: 1.6em; /* Размер для телефона */
+            margin-bottom: 20px;
+            line-height: 1.2;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        /* Описание: Trebuchet MS */
+        /* Увеличиваем заголовок на больших экранах */
+        @media (min-width: 600px) {
+            h1 { font-size: 2.3em; }
+            .aristocrat-card { padding: 45px; }
+        }
+
+        /* Текст */
         p {
-            font-size: 1.3em;
-            line-height: 1.7;
-            margin-bottom: 25px;
+            font-size: 1.05em;
+            line-height: 1.6;
+            margin-bottom: 15px;
             color: #4a4a4a;
         }
 
-        /* Выделение важных слов базовым цветом */
         .highlight {
             color: #7e93f1;
             font-weight: bold;
         }
 
-        /* Красивая кнопка-ссылка */
+        /* Твоя картинка 16:9 с правильным названием */
+        .aristocrat-img {
+            width: 100%;
+            max-width: 100%; /* Чтобы не выходила за рамки карточки */
+            height: auto;
+            border-radius: 15px;
+            margin: 10px 0 25px 0;
+            box-shadow: 0 10px 25px rgba(126, 147, 241, 0.3);
+            border: 4px solid #ffffff;
+            display: block;
+        }
+
+        /* Кнопка */
         .btn {
-            margin-top: 20px;
             display: inline-block;
-            padding: 18px 50px;
-            background-color: #7e93f1; /* Базовый цвет */
+            padding: 15px 35px;
+            background-color: #7e93f1;
             color: #ffffff;
             text-decoration: none;
-            font-family: 'Comfortaa', cursive; /* Тоже пафосный шрифт */
+            font-family: 'Comfortaa', cursive;
             font-weight: 700;
-            font-size: 1.4em;
+            font-size: 1.2em;
             border-radius: 50px;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(126, 147, 241, 0.4);
+            margin-top: 10px;
         }
 
-        /* Эффект при наведении */
+        /* Эффект пульсации при наведении */
         .btn:hover {
-            transform: translateY(-5px); /* Всплывание */
+            transform: scale(1.05);
             background-color: #ffffff;
             color: #7e93f1;
-            box-shadow: 0 10px 25px rgba(126, 147, 241, 0.6);
             border: 2px solid #7e93f1;
+            box-shadow: 0 8px 20px rgba(126, 147, 241, 0.6);
         }
-        .aristocrat-img {
-    max-width: 100%;
-    width: 600px; /* Можешь менять размер тут */
-    height: auto;
-    border-radius: 20px;
-    margin: 20px 0;
-    box-shadow: 0 10px 30px rgba(126, 147, 241, 0.5);
-    border: 4px solid #ffffff;
-}
     </style>
 </head>
 <body>
 
     <div class="aristocrat-card">
         <h1>Вас приветствует братство "Дристократов"</h1>
-        <img src="IMG_20260318_211621_056 (1).png" alt="Наше Братство" class="aristocrat-img">
         
-        <p>Если ты здесь, значит ты заинтересован нашим сообществом, это великая честь для нас. Мы представляем собственную идеологию и верование, наши принципы строятся на поклонении великому деянию человека, <span class="highlight">дристу</span>. И если тебе близки наши принципы то ты, дорогой мой можешь захотеть присоединиться к нам.</p>
+        <img src="IMG_20260318_211621_056 (1).png" alt="Братство" class="aristocrat-img">
         
-        <p>Твои дальнейшие действия только твой выбор, а мы можем всего лишь предложить тебе попытать удачу во вступлении в дристократы!</p>
+        <p>Если ты здесь, значит ты заинтересован нашим сообществом, это великая честь для нас. Мы представляем собственную идеологию и верование, наши принципы строятся на поклонении великому деянию человека, <span class="highlight">дристу</span>. </p>
         
-        <a href="https://forms.gle/SDZfBoFipLtCWs777" class="btn">Попытать удачу</a>
-    </div>
-
-</body>
-</html>
+        <p>И если тебе близки наши принципы то ты, дорогой мой,
