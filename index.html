@@ -3,245 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aristocracy Dark Edition</title>
+    <title>Aristocracy Elite</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;700&family=Montserrat:wght@200;500&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-color: #0f0f0f;
-            --card-bg: rgba(25, 25, 25, 0.8);
-            --accent-color: #7e93f1;
-            --text-main: #e0e0e0;
-            --transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --bg: #0a0a0a;
+            --accent: #7e93f1;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg);
+            color: #fff;
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        /* Навигация */
+        /* ЖИВОЙ ФОН (Создаем объекты кодом) */
+        .bg-blobs {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #0a0a0a 100%);
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: move 20s infinite alternate;
+        }
+
+        .blob-1 { width: 500px; height: 500px; background: var(--accent); top: -10%; left: -10%; }
+        .blob-2 { width: 400px; height: 400px; background: #4e5bb3; bottom: -5%; right: -5%; animation-delay: -5s; }
+        .blob-3 { width: 300px; height: 300px; background: #ffffff; top: 40%; left: 30%; opacity: 0.1; animation-duration: 15s; }
+
+        @keyframes move {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(100px, 50px) scale(1.2); }
+        }
+
+        /* НАВИГАЦИЯ */
         nav {
             position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px;
-            background: rgba(15, 15, 15, 0.9);
-            backdrop-filter: blur(10px);
+            top: 30px; left: 50%; transform: translateX(-50%);
             z-index: 1000;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            padding: 10px 30px;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            display: flex; gap: 20px;
         }
 
         nav a {
-            color: var(--text-main);
-            text-decoration: none;
-            font-family: 'Comfortaa', cursive;
-            font-size: 0.9em;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            transition: var(--transition);
-            opacity: 0.6;
+            color: #fff; text-decoration: none; font-size: 0.8em;
+            text-transform: uppercase; letter-spacing: 2px;
+            font-family: 'Comfortaa'; opacity: 0.5; transition: 0.4s;
         }
 
-        nav a:hover, nav a.active {
-            opacity: 1;
-            color: var(--accent-color);
-            text-shadow: 0 0 10px rgba(126, 147, 241, 0.5);
-        }
+        nav a:hover, nav a.active { opacity: 1; color: var(--accent); }
 
-        /* Полноэкранные секции */
+        /* СЕКЦИИ */
         section {
-            width: 100vw;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 80px 20px;
-            transition: var(--transition);
+            height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            perspective: 1000px;
         }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: var(--transition);
-        }
-
-        .container.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Матовая карточка */
-        .glass-card {
-            background: var(--card-bg);
+        .content {
+            width: 90%; max-width: 1000px;
+            padding: 60px;
+            background: var(--glass);
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
             border-radius: 40px;
-            padding: 60px 40px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            text-align: center;
+            opacity: 0; transform: rotateX(10deg) translateY(50px);
+            transition: 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
+
+        .content.show { opacity: 1; transform: rotateX(0) translateY(0); }
 
         h1 {
-            font-family: 'Comfortaa', cursive;
-            font-size: clamp(2em, 5vw, 4em);
-            margin-bottom: 30px;
-            color: #fff;
-            background: linear-gradient(45deg, #fff, var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-family: 'Comfortaa'; font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin-bottom: 20px; font-weight: 700;
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        p {
-            font-size: 1.2em;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 0 auto 30px;
-            font-weight: 300;
-        }
-
-        .aristocrat-img {
-            width: 100%;
-            max-width: 800px;
-            height: auto;
-            border-radius: 20px;
-            filter: grayscale(0.3) brightness(0.8);
-            transition: var(--transition);
-            margin-bottom: 40px;
-        }
-
-        .aristocrat-img:hover {
-            filter: grayscale(0) brightness(1);
-            transform: scale(1.02);
-        }
+        p { font-size: 1.2rem; line-height: 1.8; font-weight: 200; opacity: 0.8; }
 
         .btn {
-            display: inline-block;
-            padding: 20px 50px;
-            background: var(--accent-color);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 100px;
-            font-family: 'Comfortaa', cursive;
-            font-weight: 700;
-            font-size: 1.1em;
-            box-shadow: 0 10px 30px rgba(126, 147, 241, 0.3);
-            transition: var(--transition);
+            margin-top: 30px; display: inline-block;
+            padding: 18px 45px; background: #fff; color: #000;
+            border-radius: 100px; text-decoration: none; font-weight: 700;
+            transition: 0.3s;
         }
 
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(126, 147, 241, 0.5);
-            background: #fff;
-            color: var(--accent-color);
+        .btn:hover { background: var(--accent); color: #fff; transform: scale(1.05); }
+
+        .aristocrat-img {
+            width: 100%; max-width: 700px; border-radius: 20px;
+            margin-bottom: 30px; border: 1px solid var(--border);
         }
 
-        /* Абстракции для пустых страниц */
-        .abstract-shape {
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(45deg, var(--accent-color), transparent);
-            filter: blur(80px);
-            position: absolute;
-            z-index: -1;
-            border-radius: 50%;
-            animation: pulse 8s infinite alternate;
-        }
-
-        @keyframes pulse {
-            from { transform: scale(1) translate(0, 0); }
-            to { transform: scale(1.5) translate(50px, 50px); }
-        }
-
-        /* Мобильная адаптация */
-        @media (max-width: 768px) {
-            .glass-card { padding: 40px 20px; }
-            nav { gap: 15px; padding: 15px; }
-            nav a { font-size: 0.7em; }
+        /* Декоративная линия */
+        .line {
+            width: 60px; height: 4px; background: var(--accent);
+            margin: 20px auto; border-radius: 2px;
         }
     </style>
 </head>
 <body>
 
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
     <nav>
-        <a href="#page1" id="link1" class="active">Начало</a>
-        <a href="#page2" id="link2">Идеология</a>
-        <a href="#page3" id="link3">Испытание</a>
+        <a href="#s1" class="active">01</a>
+        <a href="#s2">02</a>
+        <a href="#s3">03</a>
     </nav>
 
-    <section id="page1">
-        <div class="abstract-shape"></div>
-        <div class="container">
-            <h1>Братство</h1>
-            <p>Добро пожаловать в цифровую резиденцию элиты. Листай ниже, чтобы почувствовать атмосферу.</p>
+    <section id="s1">
+        <div class="content">
+            <h1>БРАТСТВО</h1>
+            <div class="line"></div>
+            <p>Добро пожаловать в резиденцию. <br> Здесь начинается твой путь в элиту.</p>
         </div>
     </section>
 
-    <section id="page2">
-        <div class="container">
-            <h1>Философия</h1>
-            <div style="width: 100%; height: 2px; background: rgba(255,255,255,0.1); margin: 40px 0;"></div>
-            <p>Здесь пока тишина. Только матовый черный и твои мысли. Мы создаем нечто великое.</p>
+    <section id="s2">
+        <div class="content">
+            <h1>ИДЕОЛОГИЯ</h1>
+            <div class="line"></div>
+            <p>Мы создаем пространство, где матовый черный встречается с безупречным стилем. Листай дальше, если готов.</p>
         </div>
     </section>
 
-    <section id="page3">
-        <div class="container glass-card">
-            <h1>Вас приветствует братство "Дристократов"</h1>
-            
-            <img src="IMG_20260318_211621_056 (1).png" alt="Братство" class="aristocrat-img">
-            
-            <p>Если ты здесь, значит ты заинтересован нашим сообществом. Наши принципы строятся на поклонении великому деянию человека — <span class="highlight" style="color: var(--accent-color); font-weight: bold;">дристу</span>.</p>
-            
-            <p>Твои дальнейшие действия только твой выбор, а мы можем всего лишь предложить тебе попытать удачу!</p>
-            
-            <a href="https://forms.gle/SDZfBoFipLtCWs777" class="btn">Попытать удачу</a>
+    <section id="s3">
+        <div class="content">
+            <img src="IMG_20260318_211621_056 (1).png" class="aristocrat-img" alt="Элита">
+            <h1>ИСПЫТАНИЕ</h1>
+            <p>Если ты здесь, значит ты заинтересован. Наши принципы — это поклонение великому деянию.</p>
+            <a href="https://forms.gle/SDZfBoFipLtCWs777" class="btn">Пройти опрос</a>
         </div>
     </section>
 
     <script>
-        // Скрипт для плавного появления при скролле
-        const observerOptions = { threshold: 0.3 };
+        // Следим за скроллом, чтобы показывать блоки
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    // Обновляем навигацию
-                    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-                    document.querySelector(`nav a[href="#${entry.target.id}"]`).classList.add('active');
+                    entry.target.classList.add('show');
+                    // Меняем активную цифру в меню
+                    document.querySelectorAll('nav a').forEach(a => {
+                        a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+                    });
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.5 });
 
-        document.querySelectorAll('.container').forEach(el => observer.observe(el));
-        
-        // Плавный скролл по кнопкам меню
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+        document.querySelectorAll('.content').forEach(c => observer.observe(c));
+
+        // Параллакс эффект для фона за мышкой
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+            document.querySelectorAll('.blob').forEach((blob, index) => {
+                const speed = (index + 1) * 0.5;
+                blob.style.transform = `translate(${moveX * speed}px, ${moveY * speed}px)`;
             });
         });
-    </style>
-
+    </script>
 </body>
 </html>
